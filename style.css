@@ -22,7 +22,7 @@ input,textarea{font:inherit;color:inherit}
 /* ---------- Panggung & bingkai ponsel ---------- */
 .stage{height:100%;display:flex;align-items:center;justify-content:center;gap:40px;padding:20px}
 .phone-wrap{flex:none;display:flex;align-items:center;justify-content:center}
-.phone{position:relative;width:440px;height:956px;border-radius:62px;background:var(--surface);overflow:hidden;
+.phone{position:relative;flex:none;width:440px;height:956px;border-radius:62px;background:var(--surface);overflow:hidden;
   box-shadow:0 0 0 10px #0b1220,0 0 0 12px #2b3445,0 40px 80px rgba(10,31,68,.35);transform-origin:center center}
 .island{position:absolute;z-index:60;top:11px;left:50%;width:120px;height:34px;margin-left:-60px;border-radius:20px;background:#000}
 .statusbar{position:absolute;z-index:55;top:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0 48px;
