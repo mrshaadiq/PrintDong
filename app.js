@@ -979,9 +979,11 @@
   function fit() {
     const wrap = $('#phoneWrap');
     if (window.innerWidth <= 520) { phone.style.transform = ''; wrap.style.width = wrap.style.height = ''; return; }
-    const sc = Math.min(1, (window.innerHeight - 56) / 874, (window.innerWidth - (window.innerWidth > 1000 ? 360 : 40)) / 402);
+    /* Dimensi prototipe: 1320 × 2868 px @ 460 ppi (≈3x) = 440 × 956 pt */
+    const PW = 440, PH = 956;
+    const sc = Math.min(1, (window.innerHeight - 56) / PH, (window.innerWidth - (window.innerWidth > 1000 ? 360 : 40)) / PW);
     phone.style.transform = `scale(${sc})`;
-    wrap.style.width = Math.round(402 * sc) + 'px'; wrap.style.height = Math.round(874 * sc) + 'px';
+    wrap.style.width = Math.round(PW * sc) + 'px'; wrap.style.height = Math.round(PH * sc) + 'px';
   }
   window.addEventListener('resize', fit);
   const clock = () => { $('#sbTime').textContent = hhmm(new Date()); };
