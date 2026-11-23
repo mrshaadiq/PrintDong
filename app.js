@@ -663,7 +663,7 @@
       <div class="scroll"><div class="trk-top"><span class="mono">${o.id}</span><span class="badge ${chip[1] || 'info'}">${chip[1] ? '<span class="dot"></span>' : ''}${chip[0]}</span><span class="livetag"><i></i>Live</span></div>
         <div class="big"><div class="gauge"><svg viewBox="0 0 220 220"><circle class="bg" cx="110" cy="110" r="${R}"/><circle class="fg" cx="110" cy="110" r="${R}" style="stroke:${col}" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - Math.max(0.04, frac))}"/></svg><div class="mid">${mid}</div></div>
           <h2>${head}</h2><div class="sub">${sub}</div><div class="pill">${pill}</div>
-          ${o.status === 'ready' ? `<button class="btn" data-act="open-pickup" data-id="${o.id}">Lihat kode ambil ${I('arrow-right', 20)}</button>` : ''}</div>
+          ${o.status === 'ready' ? `<button class="btn" data-act="open-pickup" data-id="${o.id}">Lihat kode ambil ${I('arrow-right', 20)}</button>` : `<button class="btn soft" data-act="sim-done" data-id="${o.id}">${I('sparkle', 18)} Simulasi: pesanan selesai</button>`}</div>
         <div class="card tl-card"><div class="th"><b>Status pesanan</b><span>Diperbarui ${hhmm(new Date())}</span></div>${tl}</div>
         <div class="card shopmini"><div class="logo sm">${sh.ini}</div><div class="t"><b>${esc(sh.name)}</b><span>${esc(o.file)} · ${o.pages} hlm × ${o.copies}</span></div><button class="btn sm soft" data-act="soon" data-msg="Menghubungi percetakan belum tersedia di prototipe.">Hubungi</button></div>
         <div style="height:24px"></div></div></section>`;
@@ -925,6 +925,14 @@
       if (n.icon === 'crown') return goTab('plus');
       if (n.title.includes('Sinar Mas')) return go('detail', { id: 'sinarmas' });
       rerender();
+    },
+
+    /* simulasi: selesaikan pesanan yang sedang diproses (antre/dicetak) */
+    'sim-done': el => {
+      const o = S.orders.find(x => x.id === el.dataset.id);
+      if (!o || o.status === 'ready' || o.status === 'done') return;
+      o.status = 'printing'; o.printed = o.sheets; o.t.print = o.t.print || new Date();
+      advance(o);
     },
 
     /* panel demo */
