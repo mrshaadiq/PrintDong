@@ -337,7 +337,7 @@
         <div class="otp" id="otpBox">${cells}</div>
         <div class="help" id="resend"></div>
         <div class="help" style="margin-top:14px">Untuk demo, kode apa pun yang terdiri dari 6 digit akan diterima.</div></div>
-      <div style="padding:0 20px 14px"><button class="btn" data-act="verify" ${S.otp.length === 6 ? '' : 'disabled'}>Verifikasi &amp; masuk</button></div>
+      <div style="padding:0 20px 14px"><button class="btn" data-act="verify">Verifikasi &amp; masuk</button></div>
       ${keypad()}</section>`;
     },
     mount: () => {
@@ -833,7 +833,6 @@
     'send-otp': () => { if (!phoneOk()) return; S.otp = ''; S.resendAt = Date.now() + 45000; go('otp'); },
     resend: () => { S.resendAt = Date.now() + 45000; S.otp = ''; toast('Kode OTP baru dikirim ke WhatsApp'); rerender(); },
     verify: () => {
-      if (S.otp.length < 6) { const b = $('#otpBox'); b && b.classList.add('shake'); return toast('Masukkan 6 digit kode OTP', { kind: 'err' }); }
       S.loggedIn = true; toast(`Selamat datang, ${S.user.first}!`); stack = []; show('home', {}, 'fade');
     },
 
